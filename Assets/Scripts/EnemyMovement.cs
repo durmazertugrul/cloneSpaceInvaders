@@ -7,6 +7,14 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+
+        //if (transform.position.x <= -7.88f && transform.position.y <= -0.23f)
+        //{
+        //    //bottom boundary reached, move up and reverse direction
+        //    transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z); // Move the enemy up by 1 unit when hitting the bottom boundary
+        //}
+
+
     }
 
 
