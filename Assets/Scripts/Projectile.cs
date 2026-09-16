@@ -3,6 +3,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private GameObject explosionPrefab; // Reference to the explosion prefab
 
 
     void Update()
@@ -19,6 +20,10 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
+            if (explosionPrefab != null)
+            {
+                Instantiate(explosionPrefab, other.transform.position, Quaternion.identity); // Instantiate the explosion effect at the enemy's position
+            }
             Destroy(other.gameObject); // Destroy the enemy
             Destroy(gameObject); // Destroy the projectile
         }
