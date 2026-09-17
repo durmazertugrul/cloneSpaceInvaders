@@ -7,25 +7,26 @@ public class PlayerLives : MonoBehaviour
     [SerializeField] private Image[] lifeImages; // Array of UI images representing lives
     [SerializeField] private GameObject explosionPrefab;
 
+    private ScoreManager scoreManager;
+
+    private void Start()
+    {
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "EnemyProjectile")
         {
             Destroy(other.gameObject); // Destroy the enemy
             Instantiate(explosionPrefab, other.transform.position, Quaternion.identity);
 
             lives -= 1;
+            scoreManager.UpdateScore(-5); // Deduct score for losing a life
 
             for (int i = 0; i < lifeImages.Length; i++)
             {
-                if ( i < lives) 
-                {
-                    lifeImages[i].enabled = true; // Show the life image
-                }
-                else 
-                {
-                    lifeImages[i].enabled = false; // Hide the life image
-                }
+                    lifeImages[i].enabled = i < lives; // Show the life image
             }
 
             if (lives <= 0) 
@@ -34,6 +35,10 @@ public class PlayerLives : MonoBehaviour
                 //game over logic here
             }
         }
+
     }
+
+   
+
 
 }

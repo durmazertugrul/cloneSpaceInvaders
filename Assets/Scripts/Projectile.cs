@@ -5,6 +5,13 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private GameObject explosionPrefab; // Reference to the explosion prefab
 
+    private ScoreManager scoreManager;
+
+    private void Start()
+    {
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+    }
+
 
     void Update()
     {
@@ -24,6 +31,9 @@ public class Projectile : MonoBehaviour
             {
                 Instantiate(explosionPrefab, other.transform.position, Quaternion.identity); // Instantiate the explosion effect at the enemy's position
             }
+
+            scoreManager.UpdateScore(10); // Add score for hitting an enemy
+
             Destroy(other.gameObject); // Destroy the enemy
             Destroy(gameObject); // Destroy the projectile
         }

@@ -10,8 +10,5 @@ public class ProjectileShoot : MonoBehaviour
         {
             Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         }
-
-       
     }
-
 }
