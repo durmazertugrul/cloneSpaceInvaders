@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 public class GameManager : MonoBehaviour
 {
+    public int EnemyCounter = 15;
+
     [SerializeField] private GameObject mainMenuUI;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject WinUI;
@@ -31,5 +33,34 @@ public class GameManager : MonoBehaviour
         Enemies.SetActive(true);
     }
 
+    public void GameOver()
+    {
+        gameOverUI.SetActive(true);
+        mainMenuUI.SetActive(false);
+        LivesUI.SetActive(false);
+        ScoreUI.SetActive(false);
+        Player.SetActive(false);
+        Enemies.SetActive(false);
+    }
+
+    public void WinGame()
+    {
+        WinUI.SetActive(true);
+        mainMenuUI.SetActive(false);
+        LivesUI.SetActive(false);
+        ScoreUI.SetActive(false);
+        Player.SetActive(false);
+        Enemies.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 
 }

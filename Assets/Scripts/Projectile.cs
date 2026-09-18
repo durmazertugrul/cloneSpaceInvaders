@@ -4,12 +4,14 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private GameObject explosionPrefab; // Reference to the explosion prefab
+    private GameManager gameManager; 
 
     private ScoreManager scoreManager;
 
     private void Start()
     {
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
 
@@ -34,8 +36,15 @@ public class Projectile : MonoBehaviour
 
             scoreManager.UpdateScore(10); // Add score for hitting an enemy
 
+            gameManager.EnemyCounter--;
+
             Destroy(other.gameObject); // Destroy the enemy
             Destroy(gameObject); // Destroy the projectile
+
+            if (gameManager.EnemyCounter <= 0)
+            {
+                gameManager.WinGame();
+            }
         }
     }
 }
