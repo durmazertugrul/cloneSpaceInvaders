@@ -1,7 +1,3 @@
-<div align="center">
-  <img src="logo.png" alt="Space Invaders" width="380">
-</div>
-
 # CloneSpaceInvaders
 
 A Unity implementation of the classic Space Invaders arcade game, built as part of a series of clone projects for learning core Unity game development mechanics.
